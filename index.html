@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Calculator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90vw;
+            max-width: 800px;
+            height: 90vh;
+            overflow: auto;
+        }
+        h1 {
+            color: #333;
+        }
+        input, select, button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        pre {
+            background-color: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: left;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            height: 40vh;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Python Calculator</h1>
+        <label>First Number:</label>
+        <input type="number" id="num1">
+        <label>Operation:</label>
+        <select id="operation">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <label>Second Number:</label>
+        <input type="number" id="num2">
+        <button onclick="calculate()">Calculate</button>
+        <h2 id="result"></h2>
+        <h3>Python Code:</h3>
+        <pre>
+import art
+
+def add(n1, n2):
+    return n1 + n2
+
+def subtract(n1, n2):
+    return n1 - n2
+
+def multiply(n1, n2):
+    return n1 * n2
+
+def divide(n1, n2):
+    return n1 / n2
+
+operations = {
+    "+": add,
+    "-": subtract,
+    "*": multiply,
+    "/": divide,
+}
+
+def calculator():
+    print(art.logo)
+    should_accumulate = True
+    num1 = float(input("What is the first number?: "))
+
+    while should_accumulate:
+        for symbol in operations:
+            print(symbol)
+        operation_symbol = input("Pick an operation: ")
+        num2 = float(input("What is the next number?: "))
+        answer = operations[operation_symbol](num1, num2)
+        print(f"{num1} {operation_symbol} {num2} = {answer}")
+
+        choice = input(f"Type 'y' to continue calculating with {answer}, or type 'n' to start a new calculation: ")
+
+        if choice == "y":
+            num1 = answer
+        else:
+            should_accumulate = False
+            print("\n" * 20)
+            calculator()
+
+calculator()
+        </pre>
+    </div>
+
+    <script>
+        function calculate() {
+            let num1 = parseFloat(document.getElementById("num1").value);
+            let num2 = parseFloat(document.getElementById("num2").value);
+            let operation = document.getElementById("operation").value;
+            let result;
+
+            switch (operation) {
+                case "+":
+                    result = num1 + num2;
+                    break;
+                case "-":
+                    result = num1 - num2;
+                    break;
+                case "*":
+                    result = num1 * num2;
+                    break;
+                case "/":
+                    result = num1 / num2;
+                    break;
+                default:
+                    result = "Invalid Operation";
+            }
+
+            document.getElementById("result").innerText = `Result: ${result}`;
+        }
+    </script>
+</body>
+</html>
